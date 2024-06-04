@@ -1,0 +1,5 @@
+set contour surface
+set key top left
+set cntrparam levels incr 1.5,0.01,2.125
+splot [:][:][1.7:1.9] 'data' u 1:2:3 w pm3d
+
