@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{braket}
+\setlength{\parindent}{0pt}
+\usepackage{diffcoeff}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=2cm,
+    right=2cm,
+    top=2cm,
+    bottom=2cm,
+}
+
+\title{QM Project}
+\author{Nishanth S S}
+\date{July 2024}
+
+\begin{document}
+
+\maketitle
+
+\noindent
+\textbf{Question:}
+\\
+\\
+Solve the equation $ \psi_0 = c_1 \psi_1 + c_2 \psi_2. $ 
+\\
+
+\noindent
+\textbf{Solution:}
+\\
+\\
+Let's separate the  time dependent and position dependent parts of the two wave states. We know the time dependent part of the wave equation equals $ e^{-i E_n t}$. 
+\\
+\\
+\[ \implies \psi_0 = c_1 \psi_1(x) e^{-i E_1 t} + c_2 \psi_2(x) e^{-i E_2 t}\]
+\\
+
+We know that, \[ |\psi_0|^2 = \psi_0^* \psi_0 \]
+
+\[ \implies |\psi_0|^2 = (c_1^* \psi_1^* e^{i E_1 t} + c_2^* \psi_2^* e^{i E_2 t})(c_1 \psi_1 e^{-i E_1 t} + c_2 \psi_2 e^{-i E_2 t})\]
+
+\[ = c_1^* \psi_1^* c_1 \psi_1 + c_1^* \psi_1^* c_2 \psi_2 e^{i (E_1 - E_2)t} + c_2^* \psi_2^* c_1 \psi_1 e^{i (E_2 - E_1)t} + c_2^* \psi_2^* c_2 \psi_2 \]
+
+\begin{multline*}
+= |c_1|^2 |\psi_1|^2 + |c_2|^2 |\psi_2|^2 + c_1^* \psi_1^* c_2 \psi_2 \Big [cos[(E_1 - E_2)t] + i sin[(E_1 - E_2)t] \Big]   + 
+\\
+c_2^* \psi_2^* c_1 \psi_1 \Big [cos[(E_2 - E_1)t] + i sin[(E_2 - E_1)t] \Big] 
+\end{multline*}
+
+\begin{multline*}
+= |c_1|^2 |\psi_1|^2 + |c_2|^2 |\psi_2|^2 +  cos[(E_1 - E_2)t] \Big [c_1^* \psi_1^* c_2 \psi_2 + (c_1^* \psi_1^* c_2 \psi_2)^* \Big ] + 
+\\
+i sin[(E_1 - E_2)t] \Big[ c_1^* \psi_1^* c_2 \psi_2 + (c_1^* \psi_1^* c_2 \psi_2)^* \Big]
+\end{multline*}
+
+
+\end{document}
