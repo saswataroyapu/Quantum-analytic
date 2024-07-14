@@ -14,6 +14,7 @@ def energy(C1,C2):
 
 
 
+
 #The Final energy is being decomposed as terms from Eq 5 in HO-PT-VP.pdf 
 #(version a61905b4c6b8a9407d63b51472783d7654de90b7)
 
