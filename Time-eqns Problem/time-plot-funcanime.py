@@ -18,7 +18,7 @@ E0 = 0.5
 E1 = 1.5
 
 x = np.linspace(-10, 10, ngrid)  
-t1 = np.linspace(0, 10, 1000)   
+t1 = np.linspace(0, 10, 1001)   
 
 def psi0(x):
     return (1 / (np.pi ** 0.25)) * np.exp(-(x ** 2) / 2)
@@ -33,6 +33,7 @@ ax.set_ylim(0, 1)
 ax.set_xlabel('x-values')
 ax.set_ylabel('Density')
 
+written_times = set()
 
 with open('density_values.csv', 'w', newline='') as csvfile:
     csvwriter = csv.writer(csvfile)
@@ -40,6 +41,10 @@ with open('density_values.csv', 'w', newline='') as csvfile:
 
     def update(frame):
         t = t1[frame]
+        
+        if t in written_times:
+            return base,
+
         density_real = np.zeros_like(x)
         density_imag = np.zeros_like(x)
 
@@ -54,11 +59,12 @@ with open('density_values.csv', 'w', newline='') as csvfile:
         base.set_ydata(density_real)
         ax.set_title(f'Time = {t:.2f}')
 
+        # Write to the CSV file
         csvwriter.writerow([t] + list(density_real))
+        written_times.add(t)
 
         return base,
 
-    
     anim = FuncAnimation(fig, update, frames=len(t1), blit=True)
 
     anim.save('d_animation.gif', fps=10)
