@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import csv
+from scipy.linalg import expm
 
 # Constants
 c1 = 3/5 
@@ -60,25 +61,28 @@ dt = 0.01
 tmax = 10
 frames = int(tmax / dt)
 
+factor = expm(-1j*H*dt)
+
 # Set up the figure and axis
 fig, ax = plt.subplots()
 line, = ax.plot(x, np.zeros_like(x))
 ax.set_xlim(xmin, xmax)
+ax.set_ylim(0,np.max(np.abs(psi)**2))
 ax.set_xlabel('x')
 ax.set_ylabel('|ψ(x)|²')
 
-# List to store psi values for each time step
-psi_over_time = []
+# List to store density values for each time step
+density_over_time = []
 
 # Update function for animation
 def update(frame):
     global psi, time
-    dpsi = -1j * np.dot(H, psi) * dt
-    psi = psi + dpsi
+    psi = factor @ psi 
     psi = psi / np.sqrt(np.sum(np.abs(np.conj(psi)*psi) * dx))
     time += dt
-    psi_over_time.append(psi.copy())
-    line.set_ydata(np.abs(np.conj(psi)*psi))
+    density = np.abs(np.conj(psi) * psi)  
+    density_over_time.append(density.copy())  
+    line.set_ydata(density)
     ax.set_title(f'Time = {time:.2f}')
     
     ax.relim()
@@ -90,12 +94,13 @@ def update(frame):
 anim = FuncAnimation(fig, update, frames=frames, blit=True)
 
 # Save as GIF
-anim.save('wavefunction_evolution.gif', fps = 30)
+anim.save('wavefunction_evolution.gif', fps=30)
 
-# Save psi values to CSV
-with open('psi_over_time.csv', 'w', newline='') as csvfile:
+# Save density values to CSV
+with open('density_over_time.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['Time'] + list(x))  # Write header with time and x values
-    for i, psi_t in enumerate(psi_over_time):
+    for i, density_t in enumerate(density_over_time):
         time_step = i * dt
-        writer.writerow([time_step] + list(psi_t))  # Save real part
+        writer.writerow([time_step] + list(density_t))  # Save density values
+
