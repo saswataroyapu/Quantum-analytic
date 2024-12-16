@@ -8,6 +8,9 @@ Created on Tue Jun 25 10:58:03 2024
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
+import time
+
+start_time = time.time()
 
 A = np.linspace(0.01,0.5,30)
 
@@ -55,5 +58,9 @@ plt.xlabel('A')
 plt.ylabel('Deviation from quantum solver value')
 plt.title('Comparison btw Perturbation Theory and Variational Principle')
 plt.legend(loc='best')
+
+end_time = time.time()
+
+print(end_time - start_time)
 
 #plt.xlim(0.005,0.065)

@@ -8,6 +8,9 @@ Created on Mon Jun 24 10:20:45 2024
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import time
+
+start_time = time.time()
 
 omega = 1.00
 An = np.linspace(0.01,0.5,30)
@@ -59,6 +62,9 @@ df = pd.DataFrame(dict)
      
 df.to_csv('PT energy.csv')
 
+end_time = time.time()
+
+print(end_time - start_time)
 
 #print(w[0])
 #v2 = v.transpose()

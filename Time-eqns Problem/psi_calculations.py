@@ -10,6 +10,9 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import csv
 from scipy.linalg import expm
+import time
+
+start_time = time.time()
 
 # Constants
 c1 = 3/5 
@@ -56,7 +59,7 @@ for i in range(ngrid):
 psi = psi / np.sqrt(np.sum(np.abs(np.conj(psi)*psi) * dx))
 
 # Time evolution parameters
-time = 0.0
+times = 0.0
 dt = 0.01
 tmax = 10
 frames = int(tmax / dt)
@@ -76,14 +79,14 @@ density_over_time = []
 
 # Update function for animation
 def update(frame):
-    global psi, time
+    global psi, times
     psi = factor @ psi 
     psi = psi / np.sqrt(np.sum(np.abs(np.conj(psi)*psi) * dx))
-    time += dt
+    times += dt
     density = np.abs(np.conj(psi) * psi)  
     density_over_time.append(density.copy())  
     line.set_ydata(density)
-    ax.set_title(f'Time = {time:.2f}')
+    ax.set_title(f'Time = {times:.2f}')
     
     ax.relim()
     ax.autoscale_view()
@@ -104,3 +107,6 @@ with open('density_over_time.csv', 'w', newline='') as csvfile:
         time_step = i * dt
         writer.writerow([time_step] + list(density_t))  # Save density values
 
+end_time = time.time()
+
+print(end_time - start_time)

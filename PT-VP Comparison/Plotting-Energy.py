@@ -9,6 +9,9 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import pandas as pd
+import time
+
+start_time = time.time()
 
 an = np.linspace(0.01,0.5,30)
 sig = 0.25
@@ -41,19 +44,19 @@ for i in range(30):
     z = np.array([[E(x, y) for x in x_vals] for y in y_vals])
     energy.append(np.min(z))
 
-#fig = plt.figure()
-#ax = plt.axes(projection='3d')
-#vmin = np.min(z)
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+vmin = np.min(z)
 
-#surf = ax.plot_surface(x, y, z, cmap='viridis')
-#ax.view_init(-140, 60)
+surf = ax.plot_surface(x, y, z, cmap='viridis')
+ax.view_init(-140, 60)
 
-#ax.set_xlabel('C1')
-#ax.set_ylabel('C2')
-#ax.set_zlabel('Energy')
-#ax.set_title('Plot of Energy for different coefficient values')
+ax.set_xlabel('C1')
+ax.set_ylabel('C2')
+ax.set_zlabel('Energy')
+ax.set_title('Plot of Energy for different coefficient values')
 
-#plt.show()
+plt.show()
 #print(vmin)
 #print(energy)
 
@@ -61,6 +64,12 @@ dict = {'Varitional Energy':energy}
 df = pd.DataFrame(dict)
      
 df.to_csv('VP energy.csv')
+
+end_time = time.time()
+
+execution_time = end_time - start_time
+
+print(execution_time)
 
 
 

@@ -9,6 +9,9 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import time 
+
+start_time = time.time()
 
 density_direct = []
 density_coeff = []
@@ -54,3 +57,6 @@ anim = FuncAnimation(fig, update, frames=num_frames, blit=True)
 anim.save('density_difference.gif', fps=30)
 plt.show()
 
+end_time = time.time()
+
+print(end_time - start_time)

@@ -9,6 +9,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import csv
+import time
+
+start_time = time.time()
 
 c1 = 3/5 
 c2 = 4/5
@@ -69,3 +72,7 @@ with open('density_values.csv', 'w', newline='') as csvfile:
 
     anim.save('d_animation.gif', fps=10)
     plt.show()
+    
+end_time = time.time()
+
+print(end_time - start_time)

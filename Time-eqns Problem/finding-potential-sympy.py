@@ -8,6 +8,9 @@ Created on Tue Jul  9 10:57:33 2024
 import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
+import time
+
+start_time = time.time()
 
 x = sp.symbols('x') 
 x1 = np.linspace(-10,10.0,101)
@@ -42,3 +45,7 @@ for i in range(len(x1)):
     
 plt.plot(x1,V0)
 plt.plot(x1,V1,'g')
+
+end_time = time.time()
+
+print(end_time - start_time)
