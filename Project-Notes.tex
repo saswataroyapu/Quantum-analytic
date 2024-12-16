@@ -243,5 +243,41 @@ If $n = n_o$ = ground state density, then
 
 \[ \implies E[n] \geq E[n_o] \]
 
+\section{Kohn-Sham Theory}
+
+The Kohn-Sham theory is widely used in quantum mechanics to study the electronic structure of the many-body 
+systems such as atoms and molecules. 
+
+\\
+\\
+Instead of solving the many electron problem Schrodinger equation, which is computationally exhaustive due to 
+the electron-electron repulsion, Kohn and Sham suggested introducing a system of non-interacting electrons that
+ produces the same ground state density as the interacting electron system. 
+\\
+\\
+They introduced a set of single particle Schrodinger like equations called the Kohn Sham equations tha describes 
+the system of non-interacting electrons. The equation is given below:
+
+\[ (\frac{-\hbar^2}{2m}\nabla^2 + V_{eff}(r))\phi_i(r) = \epsilon_i \phi_i(r)\]
+\\
+The above equation in atomic units will be,
+\[ (\frac{-1}{2}\nabla^2 + V_{eff}(r))\phi_i(r) = \epsilon_i \phi_i(r)\]
+\\
+The effective potential approximates the effects of all electron-electron interactions. Thus, in the Kohn-Sham framework, 
+the electrons feel the collective influence of this effective potential instead of directly interacting with each other. 
+The effective potential here includes the effects of the external potential, Hartree potential and exchange correlation potential.   
+\[ \implies V_{eff}(r) = V_{ext}(r) + V_H(r) + V_{xc}(r)\] ;
+\[ V_H(r) = \int \frac{\rho(r')}{|r-r'|}d^3r'\]
+\[ V_{xc}(r) = \frac{\delta E_{xc}[\rho]}{\delta \rho(r)}\]
+\\
+The solution to the Kohn Sham equations are known as Kohn Sham orbitals. These orbitals are mathematical 
+constructs (fictitious) and are used in obtaining the electron density. 
+\\
+\\
+The Kohn Sham equations are solved iteratively in a self-consistent field approach. We start with an initial 
+guess for the electron density using which we calculate the effective potential. We then solve the single particle
+equation to obtain the orbitals using which we compute the new density. We the compare the new density with the previous 
+density and check if the difference is beyond a particular tolerance value. If not, we update the $V_{eff}$ with 
+the new density and repeat the process until the difference in densities is below the tolerance.
 
 \end{document}
