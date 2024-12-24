@@ -280,4 +280,132 @@ equation to obtain the orbitals using which we compute the new density. We the c
 density and check if the difference is beyond a particular tolerance value. If not, we update the $V_{eff}$ with 
 the new density and repeat the process until the difference in densities is below the tolerance.
 
+\section{Time-Dependent Density Functional Theory}
+
+\paragraph{Question -}
+Apply perturbation theory to $\hat{\gamma}^{ks}$ where, $\hat{\gamma}^{ks} = \gamma^{oks}(t) + 
+\lambda \gamma^{1}(t)$ given $\gamma^{1} = X_{ia} \ket{i} \bra{a} + Y_{ai}\ket{a} \bra{i}$ and 
+$\hat{H} = H^{oks} + \lambda H^1$.
+
+\paragraph{Solution:}
+Using perturbation theory, $i \frac{\partial}{\partial t} \gamma^{ks}(t) = [H , \gamma^{ks}(t)]$
+
+\[ i \frac{\partial}{\partial t} (\gamma^o + \lambda \gamma^1) = [ H^o + \lambda H^1 , \gamma^o + \lambda \gamma^1] \]
+
+\[ i \frac{\partial}{\partial t} \gamma^o + i \lambda \frac{\partial}{\partial t}\gamma^1 = [H^o , 
+\gamma^o] + \lambda [H^o , \gamma^1] + \lambda [H^1 , \gamma^o] + \lambda^2 [H^1 , \gamma^1] \]
+\\
+Equating $\lambda$ terms, we get 
+
+\[ i \frac{\partial}{\partial t} \gamma^1 = [H^o , \gamma^1] + [H^1 , \gamma^o]\]
+
+Separating the time-dependent part out of $\gamma^1$, we get
+\[ LHS = \frac{\partial}{\partial t} \gamma^1 e^{-i \omega t} = i \gamma^1 (-i \omega) e^{-i \omega t} = 
+\gamma^1 \omega e^{-i \omega t} \]  
+Similarly, we get a $e^{-i\omega t}$ term on the RHS.
+\\
+\[ \implies \omega_\alpha \gamma^1 = [\hat{H^o} , \gamma^1] + [\hat{H^1} , \gamma^o]  
+\]
+We have,
+\[ \gamma^1 = \sum_{ia} (X_{ia} \ket{i}\bra{a} + Y_{ai} \ket{a}\bra{i})  \]
+\\
+\[ \gamma^o = \sum_{m} \ket{m}\bra{m}\]
+\\
+\[ \hat{V} = \sum_{pq} v_{pq} \ket{p}\bra{q} \]
+\\
+\begin{align*}
+    H_{pq}^1 &= \frac{\partial F_{pq}}{\partial \gamma_{rs}}.\gamma_{rs}^1 \\[12pt]
+    &= \sum_{rs}v_{pqrs}.\gamma_{rs}^1 \\[12pt]
+    &=\sum_{rsjb} v_{pqrs} . ( \bra{r} X_{jb} \ket{j}\bra{b} + Y_{bj} \ket{b}\bra{j} \ket{s}) \\[12pt]
+    &=\sum_{rsjb} v_{pqrs} ( X_{jb} \delta_{rj} \delta_{bs} + Y_{bj} \delta_{rb} \delta_{js}) \\[12pt]
+    &=\sum_{jb} (v_{pqjb} X_{jb} + v_{pqbj} Y_{bj}) \\[12pt]
+    &\hat{H}^1 = \sum_{pq} H_{pq}^1 \ket{p}\bra{q} + \hat{V}\\[12pt]
+    &=\sum_{pqjb} (v_{pqjb} X_{jb} \ket{p}\bra{q} + v_{pqbj} \ket{p}\bra{q} ) + \hat{V}
+\end{align*}
+
+Consider, 
+\begin{align*}
+    [\hat{H}^1 , \gamma^o] &= \hat{H}^1 \gamma^o - \gamma^o \hat{H}^1 \\[10pt]
+    &= \sum_{jbpqm} \Big( (v_{pqjb} X_{jb} \ket{p}\braket{q|m}\bra{m} + v_{pqbj} Y_{bj} \ket{p}\braket{q|m}\bra{m}) \boldsymbol{-} \\
+    &\quad (v_{pqjb} X_{jb} \ket{m}\braket{m|p}\bra{q} + v_{pqbj} Y_{bj} \ket{m}\braket{m|p}\bra{q}) \Big) \\[10pt]
+    &= \sum_{jbpqm} \Big( v_{pqjb} X_{jb} \ket{p}\delta_{qm}\bra{m} + v_{pqbj} Y_{bj} \ket{p}\delta_{qm}\bra{m} 
+     - v_{pqjb} X_{jb} \ket{m}\delta_{mp}\bra{q} - v_{pqbj} Y_{bj} \ket{m}\delta_{mp}\bra{q} \Big) \\[10pt]
+    &= \sum_{jbpm} \Big( v_{pmjb} X_{jb} \ket{p} \bra{m} + v_{pmbj} Y_{bj} \ket{p}\bra{m} \Big) 
+     - \sum_{jbqm} \Big( v_{mqjb} X_{jb} \ket{m}\bra{q} + v_{mqbj} Y_{bj} \ket{m}\bra{q} \Big) \\[10pt]
+    &= \sum_{jbpm} \Big( v_{pmjb} X_{jb} \ket{p} \bra{m} + v_{pmbj} Y_{bj} \ket{p}\bra{m} 
+     - v_{mpjb} X_{jb} \ket{m}\bra{p} - v_{mpbj} Y_{bj} \ket{m}\bra{p} \Big)
+\end{align*}
+
+Considering the potential separately, we get 
+
+\begin{align*}
+    [\hat{V},\gamma^o] &= \hat{V} \gamma^o - \gamma^o \hat{V} \\[10pt]
+    &= \sum_{pqm} \Big( v_{pq }\ket{p}\braket{q|m}\bra{m} - \ket{m}\braket{m|p}\bra{q} v_{pq} \Big)\\[10pt]
+    &= \sum_{pqm} \Big( v_{pq }\ket{p}\delta_{qm}\bra{m} - \ket{m}\delta_{mp}\bra{q} v_{pq} \Big) \\[10pt]
+    &= \sum_{pm} v_{pm} \ket{p}\bra{m} - \sum_{qm} v_{mq} \ket{m}\bra{q}
+\end{align*}
+
+\begin{align*}
+    [\hat{H}^o , \gamma^1] &= \hat{H}^o \gamma^1 - \gamma^1 \hat{H}^o \\[10pt]
+    &= \sum_{kc} \Big( H^o ( X_{kc} \ket{k}\bra{c} + Y_{ck} \ket{c}\bra{k}) - (X_{kc} \ket{k}\bra{c} + 
+    Y_{ck} \ket{c}\bra{k})H^o \Big) \\[10pt]
+    &=  \sum_{kc} \Big(  X_{kc} H^o\ket{k}\bra{c} + Y_{ck} H^o\ket{c}\bra{k} - X_{kc} \ket{k}\bra{c}H^o - Y_{ck} 
+    \ket{c}\bra{k}H^o \Big)\\[10pt]
+    &=  \sum_{kc} \Big(  X_{kc} \epsilon_k \ket{k}\bra{c} + Y_{ck} \epsilon_c \ket{c}\bra{k} - X_{kc} \ket{k}\bra{c} 
+    \epsilon_c - Y_{ck} \ket{c}\bra{k} \epsilon_k \Big)\\[10pt]
+    &= \sum_{kc} \Big( (\epsilon_k - \epsilon_c) X_{kc} \ket{k} \bra{c} - (\epsilon_k - \epsilon_c) Y_{ck} \ket{c}\bra{k} \Big)
+\end{align*}
+
+Combining all the above equations, we get
+\begin{align*}
+\omega_\alpha \Big( \sum_{ia} (X_{ia} \ket{i}\bra{a} + Y_{ai} \ket{a}\bra{i}) \Big) &=  \sum_{jbpm} 
+\Big( v_{pmjb} X_{jb} \ket{p} \bra{m} + v_{pmbj} Y_{bj} \ket{p}\bra{m} \\[12pt]
+     &- v_{mpjb} X_{jb} \ket{m}\bra{p} - v_{mpbj} Y_{bj} \ket{m}\bra{p} \Big) + \\[12pt] 
+     &\sum_{kc} \Big( (\epsilon_k - \epsilon_c) X_{kc} \ket{k} \bra{c} - (\epsilon_k - \epsilon_c) 
+     Y_{ck} \ket{c}\bra{k} \Big) \\[12pt]
+     &+ \sum_{pm} v_{pm} \ket{p}\bra{m} - \sum_{qm} v_{mq} \ket{m}\bra{q}
+\end{align*}
+
+Projecting with $\braket{l|\hat{O}|d}$, we get
+\[ \omega_\alpha X_{ld} = - \sum_{jb} \Big( v_{ldjb} X_{jb} + v_{ldbj} Y_{bj} \Big) 
+    + (\epsilon_l - \epsilon_d) X_{ld}  + v_{ld}^{ext}\]
+\\
+Projecting with $\braket{d|\hat{O}|l}$, we get
+\[ \omega_\alpha Y_{dl} = \sum_{jb} \Big( v_{dljb} X_{jb} + v_{dlbj} Y_{bj} \Big) 
+    - (\epsilon_l - \epsilon_d) Y_{dl} + \tilde{v}_{dl}^{ext} \]
+
+Thus, we have
+\[ \sum_{jb} (\omega_{dl} \delta_{db} \delta_{lj} + v_{ldjb}) X_{jb} + \sum_{jb} v_{ldbj} Y_{bj} + 
+\omega_\alpha \sum_{jb} \delta_{db} \delta_{lj} X_{jb} =  v_{ld}^{ext}\]
+
+\[ \sum_{jb} (\omega_{dl} \delta_{db} \delta_{lj} + v_{dlbj}) Y_{bj} + \sum_{jb} v_{dljb} X_{jb} - 
+\omega_\alpha \sum_{jb} \delta_{db} \delta_{lj} Y_{bj} = -\tilde{v}_{dl}^{ext} \]
+where, $\omega_{dl} = \epsilon_d - \epsilon_l$
+\\
+We can write the above equation in the matrix form : 
+\[
+\left[
+\begin{bmatrix}
+    A & B \\
+    B^* & A^*
+\end{bmatrix}
+- \omega_\alpha
+\begin{bmatrix}
+    1 & 0 \\
+    0 & -1
+\end{bmatrix}
+\right]
+\begin{bmatrix}
+    X \\
+    Y
+\end{bmatrix}
+=
+\begin{bmatrix}
+    v_{ext} \\
+    \tilde{v}_{ext}
+\end{bmatrix}
+\]
+where, $A,B,B*$ and $A*$ are matrices.
+
+
 \end{document}
