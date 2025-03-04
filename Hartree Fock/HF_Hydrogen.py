@@ -28,9 +28,6 @@ S = np.array([[1.0, 0.6593],
 
 H_c = T + V1 + V2
 
-print("H_c")
-print(H_c)
-
 ERI = np.array([[0.7746, 0.4441, 0.4441, 0.5697],
                [0.4441, 0.2970, 0.2970, 0.4441],
                [0.4441, 0.2970, 0.2970, 0.4441],
@@ -47,16 +44,12 @@ def v_pqrs(p, q, r, s, ERI):
 
 def Fock_matrix_2e(D, Fock):
     
-    temp = np.zeros((nmo,nmo))
     for p in range(nmo):
         for q in range(nmo):
             for r in range(nmo):
                 for s in range(nmo):
                     Fock[p, q] += D[r, s] * \
                         (1.0*v_pqrs(p, q, r, s, ERI)-0.5*v_pqrs(p, r, q, s, ERI))
-    print("temp")
-    print(temp)
-    
 
 
 def build_density(C,D):
@@ -73,9 +66,6 @@ dens_mat = np.zeros((nmo, nmo))
 
 guess_E, guess_V = eigh(H_c, S)
 
-print("hcore orbital energy")
-print(guess_E)
-
 build_density(guess_V, dens_mat)
 
 errorfactor = 0.1
@@ -86,29 +76,30 @@ dens_mat[1,1] -= error
 
 print("guess_dens_mat")
 print(dens_mat)
+print()
 
-F = np.array((nmo,nmo))
-F = H_c
+F = np.zeros((nmo,nmo))
+F = H_c.copy()
 Fock_matrix_2e(dens_mat,F)
 
 print("Fock")
 print(F)
+print()
 
-
-for i in range(3):
+for i in range(10):
     
     print(i)
-    
-    F = np.zeros((nmo,nmo))
-    F = H_c
+    F = H_c.copy()
     
     Fock_matrix_2e(dens_mat, F)
     print("Fock inside")
     print(F)
+    print()
     
     eigenvalues, eigenvectors = eigh(F, S)
-    print("orbital energiesinside")
+    print("orbital energies inside")
     print(eigenvalues)
+    print()
 
     C = eigenvectors
     dens_mat_new = np.zeros((nmo, nmo))
@@ -119,15 +110,18 @@ for i in range(3):
 
     dens_mat = dens_mat_new
 
+print("Final density matrix")
 print(dens_mat)
-
+print()
 print("Fock at end")
 print(F)
+print()
 
 energy = 0
 
 print("orbital energies")
 print(eigenvalues)
+print()
 
 for p in range(nmo):
     for q in range(nmo):
