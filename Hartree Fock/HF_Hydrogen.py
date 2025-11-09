@@ -126,7 +126,7 @@ print()
 for p in range(nmo):
     for q in range(nmo):
         
-        energy += (F[p,q] + H_c[p,q])*dens_mat[p,q]
+        energy += (F[p,q] + H_c[p,q])*dens_mat[p,q]*0.5
 
 print("Energy")
 print(energy)

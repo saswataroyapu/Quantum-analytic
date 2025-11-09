@@ -408,4 +408,273 @@ We can write the above equation in the matrix form :
 where, $A,B,B*$ and $A*$ are matrices.
 
 
+\section{Runge-Gross Theorem}
+\\
+\paragraph{Statement:} It is impossible to have the same $n(\vec{r},t)$ for two different 
+$v_{ext}(\vec{r},t)$ starting from the same $\psi_{o}(\vec{r},t)$.
+
+\paragraph{Assumption:} The potential is Taylor expandable at t=0. 
+\[ v_{ext}(\vec{r},t) = \sum_{k=0}^{\infty} \frac{1}{k!} v_{ext}^{(k)} (\vec{r}) t^k\]
+
+\paragraph{Proof by Contradiction:} Let $v_{ext}(\vec{r},t)$ and $v'_{ext}(\vec{r},t)$ give rise 
+to $n(\vec{r},t)$ (the same density) and $\Delta v_{ext}(\vec{r},t) = v_{ext}(\vec{r},t) - v'_{ext}(\vec{r},t) \neq c(t)$
+\\
+\\
+Defining, 
+\[ \vec{j} (\vec{r},t) = \frac{1}{2i} \int \sum_{k=1}^{N} \Big[\delta(\vec{r} - \hat{r_k}) \vec{\nabla_k} - 
+\vec{\nabla_k}(\delta(\vec{r} - \hat{r_k})) \Big] \psi* \psi d\vec{r_2}....d\vec{r_N}\]
+
+\[ \hat{j}(\vec{r}) = \frac{1}{2} \sum_{k=1}^{N} \Big(\hat{p_k}(\delta(\vec{r} - \hat{r_k})) + 
+(\delta(\vec{r} - \hat{r_k}))\hat{p_k} \Big)\]
+
+and \[ \hat{n}(\vec{r}) = \sum_{k=1}^{N} \delta(\vec{r} - \hat{r_k})\]
+\\
+\\
+We know that,
+\[ \frac{\partial}{\partial t}n(\vec{r},t) + \vec{\nabla}.  \vec{j}(\vec{r},t) = 0\]
+\\
+\\
+Taking the second derivative with respect to time, we get
+\[ \frac{\partial^2}{\partial t^2}n(\vec{r},t) = -\vec{\nabla}.\frac{\partial}{\partial t}\vec{j}(\vec{r},t)\]
+\\
+\\
+From Ehrenfest's theorem, we have 
+\[ \frac{d}{dt}\braket{\hat{A}} = i [\hat{H},\hat{A}] + \braket{\frac{\partial \hat{A}}{\partial t}}\]
+
+From $\hat{j}(\vec{r})$, we have 
+
+\[ j(\vec{r},t) =\braket{\psi(\vec{r},t) | \hat{j}(\vec{r}) | \psi(\vec{r},t)} \]
+
+ \[ \implies \frac{\partial}{\partial t}\vec{j}(\vec{r},t) = \frac{d}{dt} \braket{\hat{j}(\vec{r})} = i \braket{[\hat{H},\hat{j}]} \]
+\\
+\\
+Now, $\hat{H} = \hat{T} +\hat{V_{ee}} + \hat{v}_{ext} $
+
+ \[ \implies [\hat{H},\hat{j}] = [\hat{T},\hat{j}] + [\hat{V_{ee}},\hat{j}] + [\hat{v}_{ext},\hat{j}] \]
+
+and , \[ \hat{v}_{ext} = \sum_{k=1}^{N} \int v_{ext}(\vec{r'},t) \delta(\vec{r'} - \hat{r_k}) dr'  \]
+\\
+\\
+Using the definitions of $\hat{n}(\vec{r})$ and $\hat{j(\vec{r}})$ we get
+
+\[ \frac{\partial}{\partial t}\vec{j}(\vec{r},t) = \frac{1}{m_e} n(\vec{r},t) \nabla  v_{ext}(\vec{r},t) + 
+i \braket{[\hat{T} + \hat{V_{ee}},\hat{j}(\vec{r})]} \]
+\\
+\\
+Using the Taylor expandable form, 
+
+\begin{align}
+\frac{\partial}{\partial t} [j(\vec{r},t) - j'(\vec{r},t)] 
+    &= \frac{1}{m_e} \, n(\vec{r},t) \, \nabla \big( v_{ext}(\vec{r},t) - v'_{ext}(\vec{r},t) \big) \notag \\
+    &= \frac{1}{m_e} \, n(\vec{r},t) \sum_{k=1}^{\infty} \vec{\nabla} \cdot \big( \Delta v_{ext}^{k}(\vec{r}) \big) \, t^k
+    \tag{6.1}
+\end{align}
+\\
+Now, from our initial assumption we have density to be same for the two $v_{ext}$.
+\\
+\\
+From the continuity equation, we can see that the time derivative of the density is then 0. Hence, 
+the difference in the current densities is 0 as well since the initial wavefunction the two densities are also same. 
+\\
+\\
+This means, the LHS of equation 6.1 is 0. That can only happen if 
+\[ \vec{\nabla} \cdot \big( \Delta v_{ext}^{k}(\vec{r})\big) = 0 \quad \forall k \]
+
+ This implies, $\Delta v_{ext}$ can't be dependent on $\vec{r}$.
+
+ \[ \implies v_{ext}(\vec{r},t) - v'_{ext}(\vec{r},t) = c(t) \]
+
+\newpage
+
+\subsection{Proofs of certin equations:}
+
+\paragraph{To Prove:}
+\[ \frac{\partial}{\partial t}n(\vec{r},t) + \vec{\nabla}.  \vec{j}(\vec{r},t) = 0\]
+
+\paragraph{Solution:}
+\[ n(\vec{r},t) = \int \psi^*(r_1,r_2,...r_N,t) \big( \sum_{k=1}^{N} \delta(\vec{r} - \hat{r_k})\big) 
+\psi(r_1,r_2,...r_N,t) dr_1...dr_N\]
+
+\[ \frac{\partial n(\vec{r},t)}{\partial t} = \sum_{k=1}^{N} \int \Big[ \frac{\partial \psi^* 
+(r_1...r_N,t)}{\partial t} \delta(\vec{r} - \hat{r_k}) psi(r_1...r_N,t) + \psi^* (r_1...r_N,t) \delta(\vec{r} - \hat{r_k}) 
+\frac{\partial \psi (r_1...r_N,t)}{\partial t} \Big] dr_1...dr_N \]
+\\
+\\
+From Schrodinger's equation, we have 
+
+\[
+\begin{aligned}
+    i \frac{\partial \psi}{\partial t} &= \hat{H} \psi \\
+    \frac{\partial \psi}{\partial t} &= -i \hat{H} \psi
+\end{aligned}
+\hspace{3cm}
+\begin{aligned}
+    -i \frac{\partial \psi^*}{\partial t} &= (\hat{H} \psi)^* \\
+    \frac{\partial \psi^*}{\partial t} &= i (\hat{H} \psi)^*
+\end{aligned}
+\]
+
+\[ \implies \partial_t n(\vec{r},t) = i \sum_{k=1}^{N} \int (\hat{H} \psi)^* \delta(\vec{r} - \hat{r_k}) 
+\psi \; dR - i \sum_{k=1}^{N} \int \psi^* \delta(\vec{r} - \hat{r_k}) \hat{H}\psi \;dR\]
+
+\[ \hat{H} = \sum_{k=1}^{N} \big(-\frac{1}{2} \nabla^2_k + v_{ext}(r_k,t) \big) + \hat{V_{ee}}\]
+\\
+\\
+Upon substituting the Hamiltonian, the potential energy operators multiplied with the wavefunctions cancel out. Hence, we are left with,
+
+\[ \partial_t n(\vec{r},t) = \frac{-i}{2} \sum_{k=1}^{N} \int (\nabla^2_k \psi)^* \delta(\vec{r} - \hat{r_k}) 
+\psi \; dR + \frac{i}{2} \sum_{k=1}^{N} \int \psi^* \delta(\vec{r} - \hat{r_k}) \nabla^2_k \psi \;dR\]
+
+\[ \partial_t n(\vec{r},t) = \frac{i}{2} \sum_{k=1}^{N} \int \delta(\vec{r} - \hat{r_k}) \big[ \psi^* \nabla^2_k 
+\psi - \nabla^2_k \psi^* \psi \big] dR \quad ...(1)\]
+\\
+\\
+Taking the divergence of the current density, we get 
+
+\begin{align*}    
+\vec{\nabla} \cdot \vec{j}(\vec{r},t) 
+&= \frac{1}{2i} \sum_{k=1}^{N} \vec{\nabla}_r \cdot \int \delta(\vec{r} - \hat{r}_k) 
+\big[ \psi^* \nabla_k \psi - \nabla_k \psi^* \psi \big] \, dR \\[6pt]
+&= \frac{1}{2i} \sum_{k=1}^{N} \int 
+\vec{\nabla}_r \delta(\vec{r} - \hat{r}_k) \cdot 
+\big[ \psi^* \nabla_k \psi - \nabla_k \psi^* \psi \big] \, dR
+\end{align*}
+\\
+\\
+Using the property $\nabla_r \delta(\vec{r}-\hat{r}_k) =-\nabla_k \delta(\vec{r}-\hat{r}_k) $ we get,
+\[ \vec{\nabla} \cdot \vec{j}(\vec{r},t) = \frac{-1}{2i} \sum_{k=1}^{N} \int \vec{\nabla}_k \delta(\vec{r} - \hat{r}_k) \cdot 
+\big[ \psi^* \nabla_k \psi - \nabla_k \psi^* \psi \big] \, dR \]
+\\
+\\
+We know that, 
+\[ \int f(r) [\nabla \delta(r)] d^3r = - \int [\nabla f(r)] \delta(r) d^3r\]
+\\
+\\
+Using this in the divergence of current density, we get
+
+\begin{align*}
+\vec{\nabla} \cdot \vec{j}(\vec{r},t) 
+&= \frac{1}{2i} \sum_{k=1}^{N} \int 
+ \delta(\vec{r} - \hat{r}_k) \vec{\nabla}_k \cdot 
+\big[ \psi^* \nabla_k \psi - \nabla_k \psi^* \psi \big] \, dR \\[6pt]
+&= \frac{-i}{2} \sum_{k=1}^{N} \int 
+ \delta(\vec{r} - \hat{r}_k) 
+\big[ \psi^* \nabla_k^2 \psi - \nabla_k^2 \psi^* \psi \big] \, dR  \qquad ...(2)
+\end{align*}
+\\
+\\
+We can see that (1) = -(2). 
+\[ \implies \frac{\partial}{\partial t}n(\vec{r},t) + \vec{\nabla}.  \vec{j}(\vec{r},t) = 0 \]
+\\
+\\
+\hrule
+\paragraph{To Prove (Ehrenfest's Theorem):}
+\[ \frac{d\braket{\hat{A}}}{dt} = i\braket{[\hat{H},\hat{A}]} + \braket{\frac{\partial \hat{A}}{\partial t}}\]
+
+\paragraph{Solution:}
+\[ \braket{\hat{A}} = \braket{\psi|\hat{A}|\psi}\]
+\\
+\\
+Taking the time derivative, we get
+\[ \frac{d\braket{\hat{A}}}{dt} = \big(\frac{\partial \bra{\psi}}{\partial t} \big) \hat{A} \ket{\psi} + 
+\bra{\psi} \frac{\partial \hat{A}}{\partial t} \ket{\psi} + \bra{\psi} \hat{A} \big(\frac{\partial \ket{\psi}}{\partial t} \big) \]
+\\
+\\
+From Schrodinger's equation, we have 
+\[
+\begin{aligned}
+    i \frac{\partial \ket{\psi}}{\partial t} &= \hat{H} \ket{\psi} \\
+    \frac{\partial \ket{\psi}}{\partial t} &= -i \hat{H} \ket{\psi}
+\end{aligned}
+\hspace{3cm}
+\begin{aligned}
+    -i \frac{\partial \bra{\psi}}{\partial t} &= \bra{\psi}\hat{H} \\
+    \frac{\partial \bra{\psi}}{\partial t} &= i \bra{\psi}\hat{H}
+\end{aligned}
+\]
+
+\begin{align*}
+\implies \frac{d\braket{\hat{A}}}{dt} &= i \braket{\psi|\hat{H}\hat{A}|\psi} + 
+\braket{\psi|\frac{\partial \hat{A}}{\partial t}|\psi} - i\braket{\psi|\hat{A}\hat{H}|\psi} \\
+&= i \big( \braket{\psi|\hat{H}\hat{A} - \hat{A}\hat{H}|\psi} \big) + \braket{\frac{\partial \hat{A}}{\partial t}} \\
+&= i \braket{[\hat{H},\hat{A}]} + \braket{\frac{\partial \hat{A}}{\partial t}} 
+\end{align*}
+\\
+\\
+\hrule
+\paragraph{To Prove:}
+\[ \frac{\partial}{\partial t}\vec{j}(\vec{r},t) = \frac{1}{m_e} n(\vec{r},t) \nabla  V_{ext}(\vec{r},t) 
++ i \braket{[\hat{T} + \hat{V_{ee}},\hat{j}(\vec{r})]} \]
+
+\paragraph{Solution:}
+Using Ehrenfest's theorem, we get
+\[ \implies \frac{\partial}{\partial t}\vec{j}(\vec{r},t) = \frac{d}{dt} \braket{\hat{j}(\vec{r})} = 
+i \braket{[\hat{H},\hat{j}]} \]
+\\
+We know that, $\hat{H} = \hat{T} +\hat{V_{ee}} + \hat{V}_{ext} $
+
+ \[ \implies [\hat{H},\hat{j}] = [\hat{T}+\hat{V_{ee}},\hat{j}] + [\hat{V}_{ext},\hat{j}] \]
+\\
+Using the above expressions, we get
+\begin{align*}
+    \frac{\partial}{\partial t}\vec{j}(\vec{r},t) &= i\braket{[\hat{V}_{ext},\hat{j}]} + 
+    i\braket{[\hat{T}+\hat{V_{ee}},\hat{j}]} \hspace{2cm} ....(1)
+\end{align*} 
+\\
+We know that,
+\begin{align*}
+    \hat{V}_{ext} &= \sum_{k=1}^{N} \int v_{ext}(\vec{r'},t) \delta(\vec{r'} - \hat{r_k}) dr' \\
+    &= \sum_{k=1}^{N} v_{ext}(\hat{r}_k,t)  \\
+    \\
+   \hat{j}(\vec{r}) &= \frac{1}{2 m_e} \sum_{k=1}^{N} \Big(\hat{p_k}(\delta(\vec{r} - \hat{r_k})) + 
+   (\delta(\vec{r} - \hat{r_k}))\hat{p_k} \Big)
+\end{align*}
+\\
+Using the above expressions, let's simplify $[\hat{V}_{ext},\hat{j}]$.
+
+\[ [\hat{V}_{ext},\hat{j}] = \Big[ \sum_{k'=1}^{N} v_{ext}(\hat{r}_{k'},t) , \frac{1}{2} \sum_{k=1}^{N} 
+\Big(\hat{p_k}(\delta(\vec{r} - \hat{r_k})) + (\delta(\vec{r} - \hat{r_k}))\hat{p_k} \Big) \Big]\]
+\\
+The commutator is 0 for $k' \neq k$. So, we have to evaluate the commutator only for $k' = k$. Let's evaluate the 
+commutator for a single k and then take a summation over all k at the end.  
+
+\begin{align*}
+    [\hat{v}_{ext},\hat{j}] &= \big[ v(\hat{r}_k) , \frac{1}{2 m_e}(\hat{p}_k \delta_k + \delta_k \hat{p}_k) \big] \\
+    &= \frac{1}{2 m_e} [v(\hat{r}_k), \hat{p}_k \delta_k ] + \frac{1}{2 m_e} [v(\hat{r}_k), \delta_k \hat{p}_k) ] \\
+\end{align*}
+\\
+Using the commutator rule $[A,BC] = [A,B]C \; + B[A,C] $, we get
+\[ [\hat{v}_{ext},\hat{j}] = \frac{1}{2 m_e} [v(\hat{r}_k), \hat{p}_k ]\delta_k  + \frac{1}{2 m_e} \hat{p}_k 
+[v(\hat{r}_k),  \delta_k ] + \frac{1}{2 m_e} [v(\hat{r}_k), \delta_k ] \hat{p}_k  + \frac{1}{2 m_e} \delta_k [v(\hat{r}_k), 
+\hat{p}_k ] \]
+\\
+$[v(\hat{r}_k),  \delta_k ] = 0$ since the delta function just multiplies with $v(\hat{r}_k)$. 
+
+\begin{align*}
+    \implies [\hat{v}_{ext},\hat{j}] &= \frac{1}{2 m_e} \Big( [v(\hat{r}_k), \hat{p}_k ]\delta_k +  
+    \delta_k [v(\hat{r}_k), \hat{p}_k ] \Big) \\
+    &= \frac{1}{2 m_e} \Big( i (\nabla_k v(\hat{r}_k)) \delta_k + \delta_k i (\nabla_k v(\hat{r}_k)) 
+    \Big) \quad ,[v(\hat{r}_k), \hat{p}_k ] =  - \hat{p}_k v(\hat{r}_k) = i \nabla_k v(\hat{r}_k) \\ 
+    &= \frac{i}{m_e} \Big( \delta_k \nabla_k v(\hat{r}_k) \Big)
+\end{align*} 
+\\
+Taking the expectation value of the commutator of all particles, we get
+\begin{align*}
+    i \braket{[\hat{V}_{ext},\hat{j}]} &= i \braket{ \sum_{k=1}^N \frac{i}{m_e} \Big( \delta(r -r_k) \nabla_k v(\hat{r}_k) \Big)} \\
+    &= \frac{-1}{m_e} \braket{\sum_{k=1}^N \delta(r -r_k) \nabla_k v(\hat{r}_k)}
+\end{align*}
+\\
+The delta function acts on $\nabla_k v(\hat{r}_k)$ within the integral to give $\nabla_r v_{ext}(r)$. 
+
+\begin{align*}
+    i \braket{[\hat{V}_{ext},\hat{j}]} &= \frac{- \nabla_r V_{ext}(\vec{r})}{m_e} \braket{\sum_{k=1}^N \delta(r-r_k)} \\
+    &= \frac{- \nabla_r V_{ext}(\vec{r})}{m_e} \int \psi* \sum_{k=1}^N \delta(r-r_k) \psi \; dr_1 dr_2 ... \\
+    &= \frac{-1}{m_e} n(\vec{r},t) \nabla_r V_{ext}(\vec{r})  
+\end{align*}
+\\
+Substituting this is (1), we get 
+\[ \frac{\partial}{\partial t}\vec{j}(\vec{r},t) = \frac{-1}{m_e} n(\vec{r},t) \nabla  V_{ext}(\vec{r},t) + 
+i \braket{[\hat{T} + \hat{V_{ee}},\hat{j}(\vec{r})]} \]
+
+
 \end{document}
